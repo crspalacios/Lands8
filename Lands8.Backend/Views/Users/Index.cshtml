@@ -23,8 +23,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Telephone)
         </th>
+
         <th>
             @Html.DisplayNameFor(model => model.ImagePath)
+        </th>
+        <th>
+           User Type
         </th>
         <th></th>
     </tr>
@@ -47,9 +51,12 @@
             @Html.DisplayFor(modelItem => item.ImagePath)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+            @Html.DisplayFor(modelItem => item.UserType.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
         </td>
     </tr>
 }

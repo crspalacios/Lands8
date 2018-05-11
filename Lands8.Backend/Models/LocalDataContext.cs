@@ -9,5 +9,7 @@ namespace Lands8.Backend.Models
     public class LocalDataContext : DataContext
     {
         public System.Data.Entity.DbSet<Lands8.Domain.User> Users { get; set; }
+
+        public System.Data.Entity.DbSet<Lands8.Domain.UserType> UserTypes { get; set; }
     }
 }

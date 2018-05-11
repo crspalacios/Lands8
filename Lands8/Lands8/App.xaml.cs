@@ -3,28 +3,62 @@
 
     using Xamarin.Forms;
     using Views;
-	public partial class App : Application
+    using Helpers;
+    using MainViewModel;
+
+    public partial class App : Application
 	{
-		public App ()
-		{
-			InitializeComponent();
+        #region Properties
+        public static NavigationPage Navigator
+        {
+            get;
+            internal
+            set;
+        }
 
-			MainPage = new NavigationPage(new LoginPage());
-		}
+        #endregion
 
-		protected override void OnStart ()
-		{
-			// Handle when your app starts
-		}
+        #region Constructors
+        public App()
+        {
+            InitializeComponent();
 
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
+            MainPage = new NavigationPage(new LoginPage());
+        }
 
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
-		}
-	}
+
+            /*if (string.IsNullOrEmpty(Settings.Token))
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
+            else
+            {
+                var mainViewModel = MainViewModel.MainViewModel.GetInstance();
+                mainViewModel.Token = Settings.Token;
+                mainViewModel.TokenType = Settings.TokenType;
+                mainViewModel.Lands = new LandsViewModel();
+                Application.Current.MainPage = new MasterPage();
+            }
+
+
+        }*/
+        #endregion
+
+        #region MyRegion
+        protected override void OnStart()
+        {
+            // Handle when your app starts
+        }
+
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
+        }
+
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
+        } 
+        #endregion
+    }
 }

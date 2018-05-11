@@ -1,10 +1,12 @@
 ﻿namespace Lands8.MainViewModel
 {
     using GalaSoft.MvvmLight.Command;
+    using Views;
     using Services;
     using System;
     using System.Windows.Input;
     using Xamarin.Forms;
+    using Lands8.Helpers;
 
     public class LoginViewModel : BaseViewModel
     {
@@ -86,8 +88,8 @@
 
         private async void Register()
         {
-            MainViewModel.GetInstance().Lands = new LandsViewModel();
-            await navigationService.Navigate("Lands2Page");
+            MainViewModel.GetInstance().Register = new RegisterViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
 
         }
 
@@ -147,7 +149,10 @@
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = token;
             mainViewModel.Lands = new LandsViewModel();
-            await navigationService.Navigate("LandPage");
+            Application.Current.MainPage = new MasterPage();
+
+  
+            
 
             this.IsRunning = false;
             this.isEnabled = true;

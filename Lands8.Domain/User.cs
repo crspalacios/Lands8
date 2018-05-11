@@ -31,8 +31,21 @@
         [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
 
+        public int UserTypeId { get; set; }
+
+        [JsonIgnore]
+        public virtual UserType UserType { get; set; }
+
         [Display(Name = "Image")]
         public string ImagePath { get; set; }
+
+        [NotMapped]
+        public byte[] ImageArray { get; set; }
+
+        [NotMapped]
+        public string Password { get; set; }
+
+
 
         [Display(Name = "Image")]
         public string ImageFullPath
