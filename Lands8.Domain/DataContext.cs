@@ -13,5 +13,9 @@ namespace Lands8.Domain
         {
 
         }
+
+        public System.Data.Entity.DbSet<Lands8.Domain.User> Users { get; set; }
+
+        public System.Data.Entity.DbSet<Lands8.Domain.UserType> UserTypes { get; set; }
     }
 }

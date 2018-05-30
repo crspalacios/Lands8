@@ -1,6 +1,7 @@
 ﻿
 namespace Lands8.MainViewModel
 {
+    using System;
     using System.Windows.Input;
     using Domain;
     using GalaSoft.MvvmLight.Command;
@@ -93,15 +94,16 @@ namespace Lands8.MainViewModel
         #endregion 
 
         #region Commands
-        public ICommand RegisterCommand
+
+        public ICommand NewUserCommand
         {
             get
             {
-                return new RelayCommand(Register);
+                return new RelayCommand(NewUser);
             }
         }
 
-        private async void Register()
+        private async void NewUser()
         {
             if (string.IsNullOrEmpty(this.FirstName))
             {
@@ -178,23 +180,13 @@ namespace Lands8.MainViewModel
             this.IsRunning = true;
             this.IsEnabled = false;
 
-            var checkConnetion = await this.apiService.CheckConnection();
-            if (!checkConnetion.IsSuccess)
-            {
-                this.IsRunning = false;
-                this.IsEnabled = true;
-                await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    checkConnetion.Message,
-                    "Accept");
-                return;
-            }
-
             byte[] imageArray = null;
             if (this.file != null)
             {
                 imageArray = FilesHelper.ReadFully(this.file.GetStream());
             }
+
+
 
             var user = new User
             {
@@ -207,12 +199,14 @@ namespace Lands8.MainViewModel
                 Password = this.Password,
             };
 
-            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
-            var response = await this.apiService.Post(
-                apiSecurity,
-                "/api",
-                "/Users",
-                user);
+            
+        
+            
+   
+
+            var response = await this.apiService.Post("http://lands8api.azurewebsites.net/",
+                                         "api/",
+                                        "user", user);
 
             if (!response.IsSuccess)
             {
@@ -225,6 +219,7 @@ namespace Lands8.MainViewModel
                 return;
             }
 
+
             this.IsRunning = false;
             this.IsEnabled = true;
 
@@ -234,6 +229,11 @@ namespace Lands8.MainViewModel
                 "Aceptar");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
+    
+
+
+
+
 
         public ICommand ChangeImageCommand
         {
